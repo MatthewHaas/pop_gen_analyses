@@ -1,0 +1,20 @@
+# Relatedness
+ ~/vcftools/bin/vcftools --gzvcf '191021_samtools_Scaffold_93;HRSCAF=1687.vcf.gz' --relatedness
+
+# Reduced size from 251 Mb to 191 Mb
+ ~/vcftools/bin/vcftools --recode --gzvcf sixteen_largest_scaffolds.vcf.gz --max-missing 0.85 --stdout | gzip -c > largest_scaffolds.vcf.gz
+
+# 7 January 2020
+
+# Tajima's D statistic ...
+# I first tried 5. That is way too small (most values are NaN)
+# 100 was better, but still many NaNs
+# 10,000 looks even better. Still some NAs but for still has values for most bins.
+~/vcftools/bin/vcftools --gzvcf '191210_samtools_Scaffold_93.vcf.gz' --TajimaD 10000
+# TajimaD: Only using bialleleic sites.
+# After filtering, kept 310556 out of a possible 310556 Sites
+# Run Time = 165.00 seconds (19 seconds for 100; 12 seconds for 1000; 11 seconds for 10000)
+
+
+# Weir and Cockram (1984) Fst calculation method (preferred)
+~/vcftools/bin/vcftools --gzvcf '191210_samtools_Scaffold_93.vcf.gz' --weir-fst-pop <filename>
