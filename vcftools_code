@@ -17,4 +17,92 @@
 
 
 # Weir and Cockram (1984) Fst calculation method (preferred)
-~/vcftools/bin/vcftools --gzvcf '191210_samtools_Scaffold_93.vcf.gz' --weir-fst-pop <filename>
+~/vcftools/bin/vcftools --gzvcf '191126_samtools_Scaffold_1063.vcf.gz' --min-meanDP 6 --weir-fst-pop natural_stand_list_for_Fst_with_vcftools.txt --weir-fst-pop breeding_line_list_for_Fst_with_vcftools.txt
+
+# Without any filtering
+# Results from VCFtools (run time 51 seconds; kept 915/919 individuals; kept 260,379 out of 260,379 sites)
+# Weir and Cockerham mean Fst estimate: -0.0009861
+# Weir and Cockerham weighted Fst estimate: 0.036019
+
+# Filtereing with the tag "--min-meanDP 6" to keep only sites with a depth of 6
+# Results from VCFtools (run time 43 seconds; kept 915/919 individuals; kept 1,731 out of 260,379 sites)
+# Weir and Cockerham mean Fst estimate: 0.0085542
+# Weir and Cockerham weighted Fst estimate: 0.051472
+
+# Recode VCF files...
+
+# Scaffold_1
+~/vcftools/bin/vcftools --gzvcf 191126_samtools_Scaffold_1.vcf.gz --min-meanDP 6 --recode
+mv out.recode.vcf Scaffold_1.recode.vcf # kept 5,787 out of 529,085 sites
+
+# Scaffold_3
+~/vcftools/bin/vcftools --gzvcf 191126_samtools_Scaffold_3.vcf.gz  --min-meanDP 6 --recode
+mv out.recode.vcf Scaffold_3.recode.vcf # kept 2,277 out of 354,723 sites
+
+# Scaffold_7
+~/vcftools/bin/vcftools --gzvcf 191126_samtools_Scaffold_7.vcf.gz --min-meanDP 6 --recode
+mv out.recode.vcf Scaffold_7.recode.vcf # kept 2,705 out of 244,467 sites
+
+# Scaffold_9
+~/vcftools/bin/vcftools --gzvcf 191126_samtools_Scaffold_9.vcf.gz --min-meanDP 6 --recode
+mv out.recode.vcf Scaffold_9.recode.vcf # kept 2,322 out of 388,864 sites
+
+# Scaffold_13
+~/vcftools/bin/vcftools --gzvcf  191126_samtools_Scaffold_13.vcf.gz --min-meanDP 6 --recode
+mv out.recode.vcf Scaffold_13.recode.vcf # kept 3,892 out of 598,478 sites
+
+# Scaffold_18
+~/vcftools/bin/vcftools --gzvcf  191126_samtools_Scaffold_18.vcf.gz --min-meanDP 6 --recode
+mv out.recode.vcf Scaffold_18.recode.vcf # kept 3,423 out of 580,815 sites
+
+# Scaffold_48
+~/vcftools/bin/vcftools --gzvcf  191126_samtools_Scaffold_48.vcf.gz --min-meanDP 6 --recode
+mv out.recode.vcf Scaffold_48.recode.vcf # kept  4,455 out of 789,717 sites
+
+# Scaffold_51
+~/vcftools/bin/vcftools --gzvcf  191126_samtools_Scaffold_51.vcf.gz --min-meanDP 6 --recode
+mv out.recode.vcf Scaffold_51.recode.vcf # kept 912 out of 81,442 sites
+
+# Scaffold_70
+~/vcftools/bin/vcftools --gzvcf  191126_samtools_Scaffold_70.vcf.gz --min-meanDP 6 --recode
+mv out.recode.vcf Scaffold_70.recode.vcf # kept 5,911 out of 700,743 sites
+
+# Scaffold_93
+~/vcftools/bin/vcftools --gzvcf  191126_samtools_Scaffold_93.vcf.gz --min-meanDP 6 --recode
+mv out.recode.vcf Scaffold_93.recode.vcf # kept 4,290 out of 657,416 sites
+
+# Scaffold_415
+~/vcftools/bin/vcftools --gzvcf  191126_samtools_Scaffold_415.vcf.gz --min-meanDP 6 --recode
+mv out.recode.vcf Scaffold_415.recode.vcf # kept 4,553 out of 579,579 sites
+
+# Scaffold_693
+~/vcftools/bin/vcftools --gzvcf  191126_samtools_Scaffold_693.vcf.gz --min-meanDP 6 --recode
+mv out.recode.vcf Scaffold_693.recode.vcf # kept 819 out of 166,587 sites
+
+# Scaffold_1062
+~/vcftools/bin/vcftools --gzvcf  191126_samtools_Scaffold_1062.vcf.gz --min-meanDP 6 --recode
+mv out.recode.vcf Scaffold_1062.recode.vcf # kept 2,809 out of 497,056 sites
+
+# Scaffold_1063
+~/vcftools/bin/vcftools --gzvcf 191126_samtools_Scaffold_1063.vcf.gz --min-meanDP 6 --recode
+mv out.recode.vcf Scaffold_1063.recode.vcf # kept 1,694 of 260,379 sites
+
+# Scaffold_1064
+~/vcftools/bin/vcftools --gzvcf 191126_samtools_Scaffold_1064.vcf.gz --min-meanDP 6 --recode
+mv out.recode.vcf Scaffold_1064.recode.vcf # kept 5,633 out of 654,759 sites
+
+# Scaffold_1065
+~/vcftools/bin/vcftools --gzvcf 191126_samtools_Scaffold_1065.vcf.gz --min-meanDP 6 --recode
+mv out.recode.vcf Scaffold_1065.recode.vcf # kept 2,851 out of 365,064 sites
+
+# Concatenate recoded scaffolds
+module load bcftools
+bcftools concat 'Scaffold_1.recode.vcf' 'Scaffold_3.recode.vcf' 'Scaffold_7.recode.vcf' 'Scaffold_9.recode.vcf' 'Scaffold_13.recode.vcf' 'Scaffold_18.recode.vcf' 'Scaffold_48.recode.vcf' 'Scaffold_51.recode.vcf' 'Scaffold_70.recode.vcf' 'Scaffold_93.recode.vcf' 'Scaffold_415.recode.vcf' 'Scaffold_693.recode.vcf' 'Scaffold_1062.recode.vcf' 'Scaffold_1063.recode.vcf' 'Scaffold_1064.recode.vcf' 'Scaffold_1065.recode.vcf' -o largest_scaffolds_recoded.vcf.gz
+
+# Weir and Cockram (1984) Fst calculation method (preferred)
+~/vcftools/bin/vcftools --gzvcf largest_scaffolds_recoded.vcf.gz --min-meanDP 6 --weir-fst-pop natural_stand_list_for_Fst_with_vcftools.txt --weir-fst-pop breeding_line_list_for_Fst_with_vcftools.txt
+
+# Results from VCFtools (run time 20 seconds; kept 915/919 individuals; kept 54,333 out of 54,333 sites)
+# Weir and Cockerham mean Fst estimate: 0.0075286
+# Weir and Cockerham weighted Fst estimate: 0.046999
+
