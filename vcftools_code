@@ -106,3 +106,39 @@ bcftools concat 'Scaffold_1.recode.vcf' 'Scaffold_3.recode.vcf' 'Scaffold_7.reco
 # Weir and Cockerham mean Fst estimate: 0.0075286
 # Weir and Cockerham weighted Fst estimate: 0.046999
 
+# Weir and Cockram (1984) Fst calculation method (preferred) with file of SNP positions to keep
+~/vcftools/bin/vcftools --gzvcf largest_scaffolds_recoded.vcf.gz --min-meanDP 6 --positions snp_positions_to_keep_for_Fst.txt --weir-fst-pop natural_stand_list_for_Fst_with_vcftools.txt --weir-fst-pop breeding_line_list_for_Fst_with_vcftools.txt
+
+# Results from VCFtools (run time 8 seconds; kept 915/919 individuals; kept 106 out of 54,333 sites--expected based on "positions" file)
+# Weir and Cockerham mean Fst estimate: 0.0064545
+# Weir and Cockerham weighted Fst estimate: 0.053078
+
+# Results from VCFtools (run time 2 seconds; kept 865/919 individuals; kept 106 out of 54,333 sites--expected based on "positions" file)
+# Aquatica samples were removed from this analysis.... Does not seem to have made a difference...
+# Weir and Cockerham mean Fst estimate: 0.0064827
+# Weir and Cockerham weighted Fst estimate: 0.052058
+
+# Results after keeping only 2,943 SNPs from 26 November 2019 SNP table... (run time=9 seconds)
+~/vcftools/bin/vcftools --gzvcf largest_scaffolds_recoded.vcf.gz --min-meanDP 6 --positions snp_positions_to_keep_for_Fst.txt --weir-fst-pop natural_stand_list_for_Fst_with_vcftools.txt --weir-fst-pop breeding_line_list_for_Fst_with_vcftools.txt
+# Weir and Cockerham mean Fst estimate: 0.0048773
+# Weir and Cockerham weighted Fst estimate: 0.027549
+
+# Results keeping 2,943 SNPs from 26 Nov 2019 SNP table and 476/919 individuals (and splitting natural stands into lakes)
+~/vcftools/bin/vcftools --gzvcf largest_scaffolds_recoded.vcf.gz --min-meanDP 6 --positions snp_positions_to_keep_for_Fst.txt --weir-fst-pop bass_lake.txt --weir-fst-pop big_fork_river.txt --weir-fst-pop clearwater_river.txt --weir-fst-pop dahler_lake.txt --weir-fst-pop decker_lake.txt --weir-fst-pop garfield_lake.txt --weir-fst-pop mudhen_lake.txt --weir-fst-pop necktie_river.txt --weir-fst-pop ottertail_river.txt --weir-fst-pop phantom_lake.txt --weir-fst-pop plantagenet.txt
+# Weir and Cockerham mean Fst estimate: 0.018793
+# Weir and Cockerham weighted Fst estimate: 0.051367
+--weir-fst-pop shell_lake.txt --weir-fst-pop upper_rice_lake.txt
+
+# Removing "unbalanced" lakes (Mudhen and Phantom Lakes)....
+# Weir and Cockerham mean Fst estimate: 0.016722
+# Weir and Cockerham weighted Fst estimate: 0.049317
+
+# Keeping only 2 lakes (from different subpopulations based on PCA)
+~/vcftools/bin/vcftools --gzvcf largest_scaffolds_recoded.vcf.gz --min-meanDP 6 --positions snp_positions_to_keep_for_Fst.txt --weir-fst-pop decker_lake.txt --weir-fst-pop garfield_lake.txt
+# Weir and Cockerham mean Fst estimate: 0.020146
+# Weir and Cockerham weighted Fst estimate: 0.039453
+
+# Adding breeding lines...
+~/vcftools/bin/vcftools --gzvcf largest_scaffolds_recoded.vcf.gz --min-meanDP 6 --positions snp_positions_to_keep_for_Fst.txt --weir-fst-pop decker_lake.txt --weir-fst-pop garfield_lake.txt --weir-fst-pop breeding_line_list_for_Fst_with_vcftools.txt
+# Weir and Cockerham mean Fst estimate: 0.022375
+# Weir and Cockerham weighted Fst estimate: 0.046049
